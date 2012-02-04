@@ -1,5 +1,5 @@
 <?php
-/**test
+/**
  * Automatic Subscriptions 1.0
 
  * Copyright 2011 Matthew Rogowski
