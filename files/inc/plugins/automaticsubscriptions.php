@@ -274,7 +274,7 @@ function automaticsubscriptions_admin_formcontainer_output_row($pluginargs)
 {
 	global $mybb, $lang, $form;
 	
-	if($pluginargs['title'] == $lang->messaging_and_notification)
+	if(!empty($lang->messaging_and_notification) && $pluginargs['title'] == $lang->messaging_and_notification)
 	{
 		$lang->load('automaticsubscriptions');
 		
