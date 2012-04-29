@@ -29,6 +29,8 @@ $plugins->add_hook("usercp_do_options_end", "automaticsubscriptions_do_option");
 $plugins->add_hook("datahandler_post_insert_thread", "automaticsubscriptions_forum");
 $plugins->add_hook("datahandler_post_insert_thread_post", "automaticsubscriptions_thread");
 $plugins->add_hook("datahandler_post_insert_post", "automaticsubscriptions_thread");
+$plugins->add_hook("admin_formcontainer_output_row", "automaticsubscriptions_admin_formcontainer_output_row");
+$plugins->add_hook("admin_user_users_edit_commit", "automaticsubscriptions_admin_user_users_edit_commit");
 
 function automaticsubscriptions_info()
 {
@@ -266,5 +268,28 @@ function automaticsubscriptions_thread(&$data)
 		
 		add_subscribed_thread($tid, $user['subscriptionmethod'], $user['uid']);
 	}
+}
+
+function automaticsubscriptions_admin_formcontainer_output_row($pluginargs)
+{
+	global $mybb, $lang, $form;
+	
+	if($pluginargs['title'] == $lang->messaging_and_notification)
+	{
+		$lang->load('automaticsubscriptions');
+		
+		$pluginargs['content'] = rtrim($pluginargs['content'], '</div>');
+		$pluginargs['content'] .= "</div><div class=\"user_settings_bit\"><label for=\"automaticsubscriptions\">{$lang->automaticsubscriptions_desc}</label><br />".$form->generate_select_box("automaticsubscriptions", array($lang->automaticsubscriptions_off, $lang->automaticsubscriptions_threads, $lang->automaticsubscriptions_threads_posts, $lang->automaticsubscriptions_threads_forum, $lang->automaticsubscriptions_threads_posts_forum), $mybb->input['automaticsubscriptions'], array('id' => 'automaticsubscriptions')).'</div>';
+	}
+}
+
+function automaticsubscriptions_admin_user_users_edit_commit()
+{
+	global $mybb, $db, $user;
+	
+	$update = array(
+		'automaticsubscriptions' => intval($mybb->input['automaticsubscriptions'])
+	);
+	$db->update_query('users', $update, 'uid = \''.intval($user['uid']).'\'');
 }
 ?>
