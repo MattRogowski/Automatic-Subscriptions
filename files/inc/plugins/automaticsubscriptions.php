@@ -1,6 +1,6 @@
 <?php
 /**
- * Automatic Subscriptions 1.0
+ * Automatic Subscriptions 1.1
 
  * Copyright 2011 Matthew Rogowski
 
@@ -38,7 +38,7 @@ function automaticsubscriptions_info()
 		"website" => "http://mattrogowski.co.uk/mybb/plugins/plugin/automatic-subscriptions",
 		"author" => "MattRogowski",
 		"authorsite" => "http://mattrogowski.co.uk/mybb/",
-		"version" => "1.0",
+		"version" => "1.1",
 		"compatibility" => "16*",
 		"guid" => "643337d2e48f9d677a42bb5767e7b5ae"
 	);
