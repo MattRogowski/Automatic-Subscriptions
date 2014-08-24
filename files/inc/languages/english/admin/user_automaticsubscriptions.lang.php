@@ -1,6 +1,6 @@
 <?php
 /**
- * Automatic Subscriptions 1.2 - Language File
+ * Automatic Subscriptions 1.2 - Admin Language File
 
  * Copyright 2014 Matthew Rogowski
 

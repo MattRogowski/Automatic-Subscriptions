@@ -1,11 +1,11 @@
 Name: Automatic Subscriptions
 Description: Allows you to automatically subscribe to all new threads and replies without having to manually subscribe to all forums and threads.
-Website: http://mattrogowski.co.uk/plugins/
-Author: MattRogowski
-Authorsite: http://mattrogowski.co.uk/plugins/
-Version: 1.1
-Compatibility: 1.6.x
-Files: 2
+Website: https://github.com/MattRogowski/Automatic-Subscriptions
+Author: Matt Rogowski
+Authorsite: http://mattrogowski.co.uk
+Version: 1.2
+Compatibility: 1.8.x
+Files: 3
 Templates added: 1
 Template changes: 2
 
@@ -15,6 +15,7 @@ This plugin enables you to get email notifications for all new threads without h
 To Install:
 Upload ./inc/plugins/automaticsubscriptions.php to ./inc/plugins/
 Upload ./inc/languages/english/automaticsubscriptions.php to ./inc/languages/english/
+Upload ./inc/languages/english/admin/user_automaticsubscriptions.php to ./inc/languages/english/admin/
 Go to ACP > Templates & Style > Templates > **expand template set** > User Control Panel Templates > member_register in the Member Templates [b]and[/b] usercp_options in the User Control Panel Templates > find:
 	<tr>
 <td colspan="2"><span class="smalltext"><label for="subscriptionmethod">{$lang->subscription_method}</label></span></td>
@@ -36,8 +37,9 @@ Change Log:
 09/05/09 - v0.1 -> Initial 'beta' release.
 03/12/11 - v0.1 -> v1.0 -> Added ability to subscribe to threads/posts in subscribed forums only. Made compatible with MyBB 1.6.5. To upgrade, deactivate plugin, reupload ./inc/plugins/automaticsubscriptions.php and ./inc/languages/english/automaticsubscriptions.php, reactivate. Make sure to re-do manual template edit explained above.
 29/04/12 - v1.0 -> v.1.1 -> Fixed bug that would result in being subscribed to forums/threads you shouldn't have been subscribed to. Added the ability to change the Automatic Subscription method of a user via the ACP. To upgrade, reupload ./inc/plugins/automaticsubscriptions.php
+24/08/14 - v1.1 -> v.1.2 -> MyBB 1.8 compatible. Fixed issue with loading language file in the Admin CP. To upgrade, reupload ./inc/plugins/automaticsubscriptions.php, and upload ./inc/languages/english/admin/user_automaticsubscriptions.php to ./inc/languages/english/admin/.
 
-Copyright 2011 Matthew Rogowski
+Copyright 2014 Matthew Rogowski
 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.

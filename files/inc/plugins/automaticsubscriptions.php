@@ -1,8 +1,8 @@
 <?php
 /**
- * Automatic Subscriptions 1.1
+ * Automatic Subscriptions 1.2
 
- * Copyright 2011 Matthew Rogowski
+ * Copyright 2014 Matthew Rogowski
 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,11 +37,11 @@ function automaticsubscriptions_info()
 	return array(
 		"name" => "Automatic Subscriptions",
 		"description" => "Allows you to automatically subscribe to all new threads and replies without having to manually subscribe to all forums and threads.",
-		"website" => "http://mattrogowski.co.uk/mybb/plugins/plugin/automatic-subscriptions",
-		"author" => "MattRogowski",
-		"authorsite" => "http://mattrogowski.co.uk/mybb/",
+		"website" => "https://github.com/MattRogowski/Automatic-Subscriptions",
+		"author" => "Matt Rogowski",
+		"authorsite" => "http://mattrogowski.co.uk",
 		"version" => "1.1",
-		"compatibility" => "16*",
+		"compatibility" => "16*,18*",
 		"guid" => "643337d2e48f9d677a42bb5767e7b5ae"
 	);
 }
@@ -276,7 +276,7 @@ function automaticsubscriptions_admin_formcontainer_output_row($pluginargs)
 	
 	if(!empty($lang->messaging_and_notification) && $pluginargs['title'] == $lang->messaging_and_notification)
 	{
-		$lang->load('automaticsubscriptions');
+		$lang->load('user_automaticsubscriptions');
 		
 		$pluginargs['content'] .= "<div class=\"user_settings_bit\"><label for=\"automaticsubscriptions\">{$lang->automaticsubscriptions_desc}</label><br />".$form->generate_select_box("automaticsubscriptions", array($lang->automaticsubscriptions_off, $lang->automaticsubscriptions_threads, $lang->automaticsubscriptions_threads_posts, $lang->automaticsubscriptions_threads_forum, $lang->automaticsubscriptions_threads_posts_forum), $mybb->input['automaticsubscriptions'], array('id' => 'automaticsubscriptions')).'</div>';
 	}
