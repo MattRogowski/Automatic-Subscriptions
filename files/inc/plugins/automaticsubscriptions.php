@@ -40,7 +40,7 @@ function automaticsubscriptions_info()
 		"website" => "https://github.com/MattRogowski/Automatic-Subscriptions",
 		"author" => "Matt Rogowski",
 		"authorsite" => "http://mattrogowski.co.uk",
-		"version" => "1.1",
+		"version" => "1.2",
 		"compatibility" => "16*,18*",
 		"guid" => "643337d2e48f9d677a42bb5767e7b5ae"
 	);
