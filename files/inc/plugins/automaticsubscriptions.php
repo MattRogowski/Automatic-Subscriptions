@@ -102,8 +102,8 @@ function automaticsubscriptions_activate()
 	foreach($templates as $template)
 	{
 		$insert = array(
-			"title" => $template['title'],
-			"template" => $template['template'],
+			"title" => $db->escape_string($template['title']),
+			"template" => $db->escape_string($template['template']),
 			"sid" => "-1",
 			"version" => "1800",
 			"dateline" => TIME_NOW
