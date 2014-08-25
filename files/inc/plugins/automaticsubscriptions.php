@@ -105,7 +105,7 @@ function automaticsubscriptions_activate()
 			"title" => $template['title'],
 			"template" => $template['template'],
 			"sid" => "-1",
-			"version" => "1600",
+			"version" => "1800",
 			"dateline" => TIME_NOW
 		);
 		$db->insert_query("templates", $insert);
