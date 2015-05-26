@@ -16,6 +16,8 @@ To Install:
 Upload ./inc/plugins/automaticsubscriptions.php to ./inc/plugins/
 Upload ./inc/languages/english/automaticsubscriptions.php to ./inc/languages/english/
 Upload ./inc/languages/english/admin/user_automaticsubscriptions.php to ./inc/languages/english/admin/
+
+To add to Registration page:
 Go to ACP > Templates & Style > Templates > **expand template set** > User Control Panel Templates > member_register in the Member Templates [b]and[/b] usercp_options in the User Control Panel Templates > find:
 	<tr>
 <td colspan="2"><span class="smalltext"><label for="subscriptionmethod">{$lang->subscription_method}</label></span></td>
@@ -31,6 +33,10 @@ Go to ACP > Templates & Style > Templates > **expand template set** > User Contr
 </tr>
 afterwards, add:
 	{$automaticsubscriptions}
+	
+To add to Profile Options (user CP) page:
+As above for Registration but go to "User Control Panel Templates" and "usercp_options".
+	
 Go to ACP > Plugins > Activate
 
 Change Log:
