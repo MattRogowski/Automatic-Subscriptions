@@ -1,8 +1,8 @@
 <?php
 /**
- * Automatic Subscriptions 1.2 - Language File
+ * Automatic Subscriptions 1.2.0 - Language File
 
- * Copyright 2014 Matthew Rogowski
+ * Copyright 2016 Matthew Rogowski
 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.

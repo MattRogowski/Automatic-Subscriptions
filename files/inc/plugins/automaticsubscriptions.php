@@ -1,8 +1,8 @@
 <?php
 /**
- * Automatic Subscriptions 1.2
+ * Automatic Subscriptions 1.2.0
 
- * Copyright 2014 Matthew Rogowski
+ * Copyright 2016 Matthew Rogowski
 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,10 +39,10 @@ function automaticsubscriptions_info()
 		"description" => "Allows you to automatically subscribe to all new threads and replies without having to manually subscribe to all forums and threads.",
 		"website" => "https://github.com/MattRogowski/Automatic-Subscriptions",
 		"author" => "Matt Rogowski",
-		"authorsite" => "http://mattrogowski.co.uk",
-		"version" => "1.2",
+		"authorsite" => "https://matt.rogow.ski",
+		"version" => "1.2.0",
 		"compatibility" => "16*,18*",
-		"guid" => "643337d2e48f9d677a42bb5767e7b5ae"
+		"codename" => "automaticsubscriptions"
 	);
 }
 
