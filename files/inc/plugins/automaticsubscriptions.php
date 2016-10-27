@@ -265,8 +265,19 @@ function automaticsubscriptions_thread(&$data)
 				continue;
 			}
 		}
-		
-		add_subscribed_thread($tid, $user['subscriptionmethod'], $user['uid']);
+
+		$notification = 0;
+		$subscriptionmethod = $user['subscriptionmethod'];
+		if($subscriptionmethod == 2) # email
+		{
+			$notification = 1;
+		}
+		elseif($subscriptionmethod == 3) # PM
+		{
+			$notification = 2;
+		}
+
+		add_subscribed_thread($tid, $notification, $user['uid']);
 	}
 }
 
