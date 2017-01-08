@@ -1,6 +1,6 @@
 <?php
 /**
- * Automatic Subscriptions 1.2.1
+ * Automatic Subscriptions 1.2.2
 
  * Copyright 2017 Matthew Rogowski
 
@@ -48,7 +48,7 @@ function automaticsubscriptions_info()
 		"website" => "https://github.com/MattRogowski/Automatic-Subscriptions",
 		"author" => "Matt Rogowski",
 		"authorsite" => "https://matt.rogow.ski",
-		"version" => "1.2.1",
+		"version" => "1.2.2",
 		"compatibility" => "16*,18*",
 		"codename" => "automaticsubscriptions"
 	);
@@ -274,7 +274,10 @@ function automaticsubscriptions_thread(&$data)
 			}
 		}
 
-		if($user['subscriptionmethod'])
+		// user default subscription method settings - 1 = no notification, 2 = email, 3 = PM
+		// thread subscription method settings - 0 = no notification, 1 = email, 2 = PM
+		// if the user has a default subscription method set, decrement it to match the appropriate thread subscription method
+		if($user['subscriptionmethod'] > 0)
 		{
 			--$user['subscriptionmethod'];
 		}
