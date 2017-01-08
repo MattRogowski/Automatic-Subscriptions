@@ -3,7 +3,7 @@ Description: Allows you to automatically subscribe to all new threads and replie
 Website: https://github.com/MattRogowski/Automatic-Subscriptions
 Author: Matt Rogowski
 Authorsite: https://matt.rogow.ski
-Version: 1.2.0
+Version: 1.2.1
 Compatibility: 1.6.x, 1.8.x
 Files: 3
 Templates added: 1
@@ -38,8 +38,9 @@ Change Log:
 03/12/11 - v0.1 -> v1.0 -> Added ability to subscribe to threads/posts in subscribed forums only. Made compatible with MyBB 1.6.5. To upgrade, deactivate plugin, reupload ./inc/plugins/automaticsubscriptions.php and ./inc/languages/english/automaticsubscriptions.php, reactivate. Make sure to re-do manual template edit explained above.
 29/04/12 - v1.0 -> v.1.1 -> Fixed bug that would result in being subscribed to forums/threads you shouldn't have been subscribed to. Added the ability to change the Automatic Subscription method of a user via the ACP. To upgrade, reupload ./inc/plugins/automaticsubscriptions.php
 25/08/14 - v1.1 -> v.1.2 -> MyBB 1.8 compatible. Fixed issue with loading language file in the Admin CP. To upgrade, reupload ./inc/plugins/automaticsubscriptions.php, and upload ./inc/languages/english/admin/user_automaticsubscriptions.php to ./inc/languages/english/admin/.
+08/01/17 - v1.2.0 -> v1.2.1 -> Templates now cached. To upgrade, reupload ./inc/plugins/automaticsubscriptions.php.
 
-Copyright 2016 Matthew Rogowski
+Copyright 2017 Matthew Rogowski
 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.

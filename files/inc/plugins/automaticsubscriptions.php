@@ -1,8 +1,8 @@
 <?php
 /**
- * Automatic Subscriptions 1.2.0
+ * Automatic Subscriptions 1.2.1
 
- * Copyright 2016 Matthew Rogowski
+ * Copyright 2017 Matthew Rogowski
 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,6 +32,14 @@ $plugins->add_hook("datahandler_post_insert_post", "automaticsubscriptions_threa
 $plugins->add_hook("admin_formcontainer_output_row", "automaticsubscriptions_admin_formcontainer_output_row");
 $plugins->add_hook("admin_user_users_edit_commit", "automaticsubscriptions_admin_user_users_edit_commit");
 
+global $templatelist;
+
+if($templatelist)
+{
+	$templatelist .= ',';
+}
+$templatelist .= 'automaticsubscriptions';
+
 function automaticsubscriptions_info()
 {
 	return array(
@@ -40,7 +48,7 @@ function automaticsubscriptions_info()
 		"website" => "https://github.com/MattRogowski/Automatic-Subscriptions",
 		"author" => "Matt Rogowski",
 		"authorsite" => "https://matt.rogow.ski",
-		"version" => "1.2.0",
+		"version" => "1.2.1",
 		"compatibility" => "16*,18*",
 		"codename" => "automaticsubscriptions"
 	);
@@ -49,7 +57,7 @@ function automaticsubscriptions_info()
 function automaticsubscriptions_install()
 {
 	global $db;
-	
+
 	if(!$db->field_exists("automaticsubscriptions", "users"))
 	{
 		$db->add_column("users", "automaticsubscriptions", "SMALLINT(1) NOT NULL DEFAULT '0'");
@@ -59,14 +67,14 @@ function automaticsubscriptions_install()
 function automaticsubscriptions_is_installed()
 {
 	global $db;
-	
+
 	return $db->field_exists("automaticsubscriptions", "users");
 }
 
 function automaticsubscriptions_uninstall()
 {
 	global $db;
-	
+
 	if($db->field_exists("automaticsubscriptions", "users"))
 	{
 		$db->drop_column("users", "automaticsubscriptions");
@@ -76,11 +84,11 @@ function automaticsubscriptions_uninstall()
 function automaticsubscriptions_activate()
 {
 	global $db;
-	
+
 	require_once MYBB_ROOT . "inc/adminfunctions_templates.php";
-	
+
 	automaticsubscriptions_deactivate();
-	
+
 	$templates = array();
 	$templates[] = array(
 		"title" => "automaticsubscriptions",
@@ -115,15 +123,15 @@ function automaticsubscriptions_activate()
 function automaticsubscriptions_deactivate()
 {
 	global $db;
-	
+
 	require_once MYBB_ROOT . "inc/adminfunctions_templates.php";
-	
+
 	$templates = array(
 		"automaticsubscriptions"
 	);
 	$templates = "'" . implode("','", $templates) . "'";
 	$db->delete_query("templates", "title IN ({$templates})");
-	
+
 	find_replace_templatesets("member_register", "#".preg_quote('{$automaticsubscriptions}')."#i", '', 0);
 	find_replace_templatesets("usercp_options", "#".preg_quote('{$automaticsubscriptions}')."#i", '', 0);
 }
@@ -131,9 +139,9 @@ function automaticsubscriptions_deactivate()
 function automaticsubscriptions_option()
 {
 	global $mybb, $lang, $templates, $automaticsubscriptions;
-	
+
 	$lang->load("automaticsubscriptions");
-	
+
 	if(THIS_SCRIPT == "usercp.php" && $mybb->input['action'] == "options")
 	{
 		$automaticsubscriptions_off_selected = $automaticsubscriptions_threads_selected = $automaticsubscriptions_threads_posts_selected = $automaticsubscriptions_threads_forum_selected = $automaticsubscriptions_threads_posts_forum_selected = "";
@@ -158,14 +166,14 @@ function automaticsubscriptions_option()
 			$automaticsubscriptions_off_selected = " selected=\"selected\"";
 		}
 	}
-	
+
 	eval("\$automaticsubscriptions = \"".$templates->get('automaticsubscriptions')."\";");
 }
 
 function automaticsubscriptions_do_option()
 {
 	global $mybb, $db, $user_info;
-	
+
 	$uid = 0;
 	// registration form
 	if($user_info['uid'])
@@ -176,7 +184,7 @@ function automaticsubscriptions_do_option()
 	{
 		$uid = $mybb->user['uid'];
 	}
-	
+
 	$update = array(
 		"automaticsubscriptions" => intval($mybb->input['automaticsubscriptions'])
 	);
@@ -186,12 +194,12 @@ function automaticsubscriptions_do_option()
 function automaticsubscriptions_forum(&$data)
 {
 	global $db, $draft_check;
-	
+
 	if($draft_check)
 	{
 		return;
 	}
-	
+
 	// select all users who want to subscribe to this forum and aren't already subscribed
 	// then subscribe them to the forum so they'll get an email about this new thread
 	$fid = intval($data->thread_insert_data['fid']);
@@ -211,7 +219,7 @@ function automaticsubscriptions_forum(&$data)
 		{
 			continue;
 		}
-		
+
 		if($user['automaticsubscriptions'] == 3 || $user['automaticsubscriptions'] == 4)
 		{
 			$query2 = $db->simple_select("forumsubscriptions", "*", "fid='".intval($fid)."' AND uid='".intval($user['uid'])."'", array('limit' => 1));
@@ -221,7 +229,7 @@ function automaticsubscriptions_forum(&$data)
 				continue;
 			}
 		}
-		
+
 		add_subscribed_forum($fid, $user['uid']);
 	}
 }
@@ -229,12 +237,12 @@ function automaticsubscriptions_forum(&$data)
 function automaticsubscriptions_thread(&$data)
 {
 	global $db, $draft_check;
-	
+
 	if($draft_check)
 	{
 		return;
 	}
-	
+
 	// select all users who want to subscribe to this thread and aren't already subscribed
 	// then subscribe them to the thread so they'll get an email about this new reply
 	$tid = intval($data->post_insert_data['tid']);
@@ -255,7 +263,7 @@ function automaticsubscriptions_thread(&$data)
 		{
 			continue;
 		}
-		
+
 		if($user['automaticsubscriptions'] == 4)
 		{
 			$query2 = $db->simple_select("forumsubscriptions", "*", "fid='".intval($thread['fid'])."' AND uid='".intval($user['uid'])."'", array('limit' => 1));
@@ -265,7 +273,7 @@ function automaticsubscriptions_thread(&$data)
 				continue;
 			}
 		}
-		
+
 		add_subscribed_thread($tid, $user['subscriptionmethod'], $user['uid']);
 	}
 }
@@ -273,11 +281,11 @@ function automaticsubscriptions_thread(&$data)
 function automaticsubscriptions_admin_formcontainer_output_row($pluginargs)
 {
 	global $mybb, $lang, $form;
-	
+
 	if(!empty($lang->messaging_and_notification) && $pluginargs['title'] == $lang->messaging_and_notification)
 	{
 		$lang->load('user_automaticsubscriptions');
-		
+
 		$pluginargs['content'] .= "<div class=\"user_settings_bit\"><label for=\"automaticsubscriptions\">{$lang->automaticsubscriptions_desc}</label><br />".$form->generate_select_box("automaticsubscriptions", array($lang->automaticsubscriptions_off, $lang->automaticsubscriptions_threads, $lang->automaticsubscriptions_threads_posts, $lang->automaticsubscriptions_threads_forum, $lang->automaticsubscriptions_threads_posts_forum), $mybb->input['automaticsubscriptions'], array('id' => 'automaticsubscriptions')).'</div>';
 	}
 }
@@ -285,7 +293,7 @@ function automaticsubscriptions_admin_formcontainer_output_row($pluginargs)
 function automaticsubscriptions_admin_user_users_edit_commit()
 {
 	global $mybb, $db, $user;
-	
+
 	$update = array(
 		'automaticsubscriptions' => intval($mybb->input['automaticsubscriptions'])
 	);
