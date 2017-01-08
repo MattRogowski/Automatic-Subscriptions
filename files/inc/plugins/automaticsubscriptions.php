@@ -274,6 +274,11 @@ function automaticsubscriptions_thread(&$data)
 			}
 		}
 
+		if($user['subscriptionmethod'])
+		{
+			--$user['subscriptionmethod'];
+		}
+
 		add_subscribed_thread($tid, $user['subscriptionmethod'], $user['uid']);
 	}
 }
